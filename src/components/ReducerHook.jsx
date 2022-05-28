@@ -29,33 +29,40 @@ const initialState = {
 
 export default function ReducerHook() {
   const [{count, todos} , dispatch] = useReducer(reducer, {...initialState})
-  const [text, setText] = useState()
+  const [text, setText] = useState('')
 
   const onSubmit = (e) => {
     e.preventDefault()
+    if (text === "") return
     dispatch({ type:Actions.addTodo, payload:{ text }})
+    setText('')
   }
 
   return (
-    <main className="Main">
-      <h4 className='title'>Use Reducer</h4>
-      <p className='count'>Count:{count}</p>
+    <main className="hook-wrapper">
+      <h4 className='hook-title'>Use Reducer</h4>
+      <p className='count'>Count: {count}</p>
       <div className="btns">
-        <button className='btn' onClick={() => {dispatch({ type:Actions.increment })}}> + </button>
-        <button className='btn' onClick={() => {dispatch({ type:Actions.decrement })}}> - </button>
+        <button className='btn btn-increment' onClick={() => {dispatch({ type:Actions.increment })}}> + </button>
+        <button className='btn btn-increment' onClick={() => {dispatch({ type:Actions.decrement })}}> - </button>
       </div>
-      <form action="" onSubmit={(e) => onSubmit(e)}>
+      <form action="" className='hook-form' onSubmit={(e) => onSubmit(e)}>
         <input 
+            className='hook-form-input'
             type="text" 
             value={text} 
             onChange={(e) => setText(e.target.value)} 
         />
+        <input className='btn form-btn' type="submit" value="add Todo"/>
       </form>
-      {todos.map((todo, idx) => {
-        return (
-          <div key={idx}>{todo}</div> 
-        )
-      })}
+      <div className="todos">
+        {todos.length >= 1 && <div className='todos-title'>Todos</div>}
+        {todos.map((todo, idx) => {
+          return (
+            <div className='todo' key={idx}>{todo}</div> 
+          )
+        })}
+      </div>
     </main>
   )
 }
