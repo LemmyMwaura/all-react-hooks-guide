@@ -14,11 +14,17 @@ export default function RefHook() {
   }
 
   return (
-    <main>
-      <input ref={inputRef} value={name} onChange={e => setName(e.target.value)} />
+    <main className='hook-wrapper'>
+       <h4 className='hook-title'>Use Ref</h4>
+      <input 
+        className="hook-form-input"
+        ref={inputRef} 
+        value={name} 
+        onChange={e => setName(e.target.value)} 
+      />
       <div className="name">My name is {name}</div>
-      <div>I rendered {renderCount.current}</div>
-      <button onClick={focus}>focus</button>
+      <div>I rendered: {renderCount.current} times</div>
+      <button className='btn' onClick={focus}>focus</button>
     </main>
   )
 }
