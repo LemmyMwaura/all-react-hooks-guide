@@ -15,7 +15,7 @@ export default function RefHook() {
 
   return (
     <main className='hook-wrapper'>
-       <h4 className='hook-title'>Use Ref</h4>
+      <h4 className='hook-title'>Use Ref</h4>
       <input 
         className="hook-form-input"
         ref={inputRef} 
